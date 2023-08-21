@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.7.202.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\NrExtras.Logger\NrExtras.Logger.csproj" />
+    <ProjectReference Include="..\NrExtras.StringsHelper\NrExtras.StringsHelper.csproj" />
+  </ItemGroup>
+
+</Project>
