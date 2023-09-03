@@ -73,12 +73,12 @@ namespace NrExtras.SQL_Helper
                             // Log the exception and continue or rethrow based on ignoreArgumentOutOfRangeException
                             if (ex is ArgumentOutOfRangeException && ignoreArgumentOutOfRangeException)
                             {
-                                Logger.Logger.WriteToLog($"Error mapping data to object: {ex.Message}", LogLevel.Warning);
+                                WriteToLog($"Error mapping data to object: {ex.Message}", LogLevel.Warning);
                                 continue; // Skip this property and continue with the next one
                             }
                             else
                             {
-                                Logger.Logger.WriteToLog($"Error mapping data to object: {ex.Message}", LogLevel.Error);
+                                WriteToLog($"Error mapping data to object: {ex.Message}", LogLevel.Error);
                                 throw; // Rethrow the exception to allow it to propagate
                             }
                         }
@@ -88,7 +88,7 @@ namespace NrExtras.SQL_Helper
             }
             catch (Exception ex)
             {
-                Logger.Logger.WriteToLog($"Error reading data from data reader: {ex.Message}", LogLevel.Error);
+                WriteToLog($"Error reading data from data reader: {ex.Message}", LogLevel.Error);
                 throw; // Rethrow the exception to allow it to propagate
             }
             finally

@@ -78,7 +78,7 @@ namespace NrExtras.RandomPasswordGenerator
             catch (Exception ex)
             {
                 // Log the exception for debugging purposes
-                Logger.Logger.WriteToLog($"Error generating password: {ex.Message}", LogLevel.Error);
+                WriteToLog($"Error generating password: {ex.Message}", LogLevel.Error);
 
                 // Rethrow the exception to allow it to propagate
                 throw;

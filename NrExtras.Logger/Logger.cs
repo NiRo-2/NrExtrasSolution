@@ -100,13 +100,13 @@ namespace NrExtras.Logger
         {
             try
             {
-                EventLog eventLog = new EventLog() { Source = Logger.GetAppName() };
+                EventLog eventLog = new EventLog() { Source = GetAppName() };
                 eventLog.WriteEntry(s, eventLogEntryType);
             }
             catch (Exception ex)
             {
-                Logger.WriteToLog("Error writing data to windows event viewer", LogLevel.Error);
-                Logger.WriteToLog(ex);
+                WriteToLog("Error writing data to windows event viewer", LogLevel.Error);
+                WriteToLog(ex);
             }
         }
     }

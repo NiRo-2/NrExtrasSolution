@@ -66,7 +66,7 @@ namespace NrExtras.Excel_Helper
                                     catch (Exception ex)
                                     {
                                         row.Add("");
-                                        Logger.Logger.WriteToLog("Error while reading cell, adding empty val instead. Err: " + ex.Message, LogLevel.Error);
+                                        WriteToLog("Error while reading cell, adding empty val instead. Err: " + ex.Message, LogLevel.Error);
                                     }
                                 }
 

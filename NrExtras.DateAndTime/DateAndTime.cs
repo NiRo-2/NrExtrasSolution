@@ -10,7 +10,7 @@
         /// <returns>Returns a DateTime object that represents value of the Unix time (utc time zone).</returns>
         public static DateTime UnixTimeToDateTime(long unixtime, bool toLocalTime = false)
         {
-            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            System.DateTime dtDateTime = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
             dtDateTime = dtDateTime.AddSeconds(unixtime);
 
             if (toLocalTime)

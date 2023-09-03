@@ -103,7 +103,7 @@ namespace NrExtras.JwtToken_Helper
             }
             catch (Exception e)
             {
-                Logger.Logger.WriteToLog(e.Message, LogLevel.Error);
+                WriteToLog(e.Message, LogLevel.Error);
                 return false;
             }
             return true;
