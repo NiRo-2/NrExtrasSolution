@@ -19,7 +19,7 @@ namespace NrExtras.EncryptionHelper
             return Convert.ToBase64String(encryptedData);
         }
         /// <summary>
-        /// Decrypt key using local machine validtion
+        /// Decrypt key using local machine validation. **data key be decrypt only on the machine encrypted it**
         /// </summary>
         /// <param name="encryptedKey">encrypted key to decrypt</param>
         /// <param name="optionalEntropy">null be default. incase this encrypted data have extra security</param>
