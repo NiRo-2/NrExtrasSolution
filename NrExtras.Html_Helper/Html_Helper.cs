@@ -1,4 +1,7 @@
 ﻿using Ganss.Xss;
+using System.IO.Compression;
+using System.Text;
+using System.Web;
 using WebMarkupMin.Core;
 
 namespace NrExtras.Html_Helper
