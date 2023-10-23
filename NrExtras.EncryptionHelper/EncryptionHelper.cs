@@ -16,7 +16,7 @@ namespace NrExtras.EncryptionHelper
         public static string EncryptKey(string key, byte[]? optionalEntropy = null)
         {
             byte[] encryptedData = ProtectedData.Protect(Encoding.UTF8.GetBytes(key), optionalEntropy, DataProtectionScope.LocalMachine);
-            return Convert.ToBase64String(encryptedData);
+            return StringsHelper.StringsHelper.ToBase64(encryptedData);
         }
         /// <summary>
         /// Decrypt key using local machine validation. **data key be decrypt only on the machine encrypted it**
@@ -29,7 +29,7 @@ namespace NrExtras.EncryptionHelper
             //incase of empty encryped key - return empty string
             if (string.IsNullOrEmpty(encryptedKey)) return "";
 
-            byte[] encryptedData = Convert.FromBase64String(encryptedKey);
+            byte[] encryptedData = StringsHelper.StringsHelper.FromBase64ToBytes(encryptedKey);
             byte[] decryptedData = ProtectedData.Unprotect(encryptedData, optionalEntropy, DataProtectionScope.LocalMachine);
             return Encoding.UTF8.GetString(decryptedData);
         }

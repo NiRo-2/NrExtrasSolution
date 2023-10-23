@@ -84,7 +84,24 @@ namespace NrExtras.StringsHelper
             byte[] data = Convert.FromBase64String(encodedString);
             return Encoding.UTF8.GetString(data);
         }
-
+        /// <summary>
+        /// Get string from base64 bytes
+        /// </summary>
+        /// <param name="encodedBytes">base64-encoded bytes</param>
+        /// <returns>decoded string</returns>
+        public static string FromBase64(byte[] encodedBytes)
+        {
+            return Encoding.UTF8.GetString(encodedBytes);
+        }
+        /// <summary>
+        /// Get byte array from base64 string
+        /// </summary>
+        /// <param name="encodedString">base64 string</param>
+        /// <returns>decoded byte array</returns>
+        public static byte[] FromBase64ToBytes(string encodedString)
+        {
+            return Convert.FromBase64String(encodedString);
+        }
         /// <summary>
         /// Convert string to base 64 string
         /// </summary>
@@ -94,6 +111,15 @@ namespace NrExtras.StringsHelper
         {
             var plainTextBytes = Encoding.UTF8.GetBytes(inputString);
             return Convert.ToBase64String(plainTextBytes);
+        }
+        /// <summary>
+        /// Convert byte array to base64 string
+        /// </summary>
+        /// <param name="inputBytes">input byte array</param>
+        /// <returns>base64 string</returns>
+        public static string ToBase64(byte[] inputBytes)
+        {
+            return Convert.ToBase64String(inputBytes);
         }
 
         //string compression using LZStringCSharp

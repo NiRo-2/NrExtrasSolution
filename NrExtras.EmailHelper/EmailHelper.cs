@@ -1,4 +1,5 @@
 ﻿using System.Net.Mail;
+using System.Text.RegularExpressions;
 
 namespace NrExtras.EmailHelper
 {
@@ -11,22 +12,14 @@ namespace NrExtras.EmailHelper
         /// <returns>true if valid, false if invalid</returns>
         public static bool IsValidEmail(string email)
         {
-            if(string.IsNullOrEmpty(email)) return false;
-
-            var trimmedEmail = email.Trim();
-
-            if (trimmedEmail.EndsWith("."))
+            if (string.IsNullOrEmpty(email))
                 return false;
 
-            try
-            {
-                var addr = new System.Net.Mail.MailAddress(email);
-                return addr.Address == trimmedEmail;
-            }
-            catch
-            {
-                return false;
-            }
+            // Define a regular expression pattern for email validation
+            string pattern = @"^(?i)[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$";
+
+            // Use regular expression to check if the email is valid
+            return Regex.IsMatch(email, pattern);
         }
 
         /// <summary>

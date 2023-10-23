@@ -12,6 +12,14 @@ namespace NrExtras.RandomPasswordGenerator
         private static int DEFAULT_MAX_PASSWORD_LENGTH = 10;
 
         /// <summary>
+        /// Generate 512 bit pass
+        /// </summary>
+        /// <returns>random password</returns>
+        public static string Generate512BitPassword()
+        {
+            return Generate(64);
+        }
+        /// <summary>
         /// Generate 256 bit pass
         /// </summary>
         /// <returns>random password</returns>
