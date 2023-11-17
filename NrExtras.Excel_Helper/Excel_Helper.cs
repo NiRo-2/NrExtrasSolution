@@ -1,7 +1,6 @@
 ﻿using ExcelDataReader;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
-using NrExtras.DynamicObjects_Helper;
 using System.Data;
 using static NrExtras.Logger.Logger;
 
@@ -159,36 +158,52 @@ namespace NrExtras.Excel_Helper
         /// <exception cref="Exception"></exception>
         public static void WriteExclFile(string filePath, Dictionary<string, List<List<string>>> excelData, bool overWriteExists = true)
         {
-            //if file exists and settings not to overwrite - throw exception
+            // If the file exists and the settings are not to overwrite, throw an exception
             if (File.Exists(filePath) && overWriteExists == false)
                 throw new Exception("File " + filePath + " already exists.");
 
             try
             {
+                // Write the MemoryStream to the specified file
+                using (MemoryStream excelStream = GenerateExcelStream(excelData))
+                    File.WriteAllBytes(filePath, excelStream.ToArray());
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Get excel file (as MemoryStream) from excelData
+        /// </summary>
+        /// <param name="excelData">excel data as dictionary of sheets. each sheet is list of lists creating 2d table</param>
+        /// <returns>MemoryStream object holding excel file</returns>
+        public static MemoryStream GenerateExcelStream(Dictionary<string, List<List<string>>> excelData)
+        {
+            using (var stream = new MemoryStream())
+            {
                 IWorkbook workbook = new XSSFWorkbook();
-                //write sheets
+
                 foreach (var sheet in excelData)
                 {
-                    XSSFSheet xssf_sheet = (XSSFSheet)workbook.CreateSheet(sheet.Key);
+                    ISheet xssf_sheet = workbook.CreateSheet(sheet.Key);
 
                     for (int rowNum = 0; rowNum < sheet.Value.Count; rowNum++)
-                    {//each row
+                    {
                         var row = xssf_sheet.CreateRow(rowNum);
                         for (int colNum = 0; colNum < sheet.Value[rowNum].Count; colNum++)
-                        {//each cell
+                        {
                             var cell = row.CreateCell(colNum);
                             cell.SetCellValue(sheet.Value[rowNum][colNum]);
                         }
                     }
                 }
 
-                //write file
-                using (FileStream sw = File.Create(filePath))
-                    workbook.Write(sw, false);
-            }
-            catch
-            {
-                throw;
+                workbook.Write(stream);
+
+                // Return the MemoryStream
+                return stream;
             }
         }
     }
