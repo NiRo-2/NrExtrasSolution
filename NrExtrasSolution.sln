@@ -53,7 +53,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.Yaml_Helper", "NrE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.Google", "NrExtras.Google\NrExtras.Google.csproj", "{79B999C2-4FB3-43C0-AA3B-EBA90765D18F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NrExtras.ML", "NrExtras.ML\NrExtras.ML.csproj", "{B0FE8730-AADB-4642-8BE8-F1F4843F6520}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.ML", "NrExtras.ML\NrExtras.ML.csproj", "{B0FE8730-AADB-4642-8BE8-F1F4843F6520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NrExtras.JsonHelper", "NrExtras.JsonHelper\NrExtras.JsonHelper.csproj", "{0B016D47-B25C-4EF8-9976-74A563FBEECA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -165,6 +167,10 @@ Global
 		{B0FE8730-AADB-4642-8BE8-F1F4843F6520}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B0FE8730-AADB-4642-8BE8-F1F4843F6520}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B0FE8730-AADB-4642-8BE8-F1F4843F6520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B016D47-B25C-4EF8-9976-74A563FBEECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B016D47-B25C-4EF8-9976-74A563FBEECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B016D47-B25C-4EF8-9976-74A563FBEECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B016D47-B25C-4EF8-9976-74A563FBEECA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
