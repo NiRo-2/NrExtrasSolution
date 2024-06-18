@@ -93,7 +93,7 @@ namespace NrExtras.NetAddressUtils
             var country = GetCountryFromIpAddress(ipAddress);
             var hostname = GetHostnameFromHttpContext(httpContext);
 
-            return $"IP: {ipAddress}, Host: {hostname}, Country: {country}";
+            return $"IP: {ipAddress}, Hostname: {hostname}, Country: {country}";
         }
     }
 }
