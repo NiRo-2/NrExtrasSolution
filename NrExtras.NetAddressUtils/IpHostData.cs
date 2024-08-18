@@ -32,7 +32,7 @@ namespace NrExtras.NetAddressUtils
                 {
                     // Check if the database is outdated
                     if (reader.Metadata.BuildDate < DateTime.Now.AddMonths(-6))
-                        Console.WriteLine("GeoLite2 database is older than 6 months. Please update at https://www.maxmind.com/en/accounts/1027697/geoip/downloads");
+                        Console.WriteLine("GeoLite2 database is older than 6 months. Please update at https://www.maxmind.com/en/accounts/1027697/geoip/downloads - choose GeoLite2 Country GeoIP2 Binary (.mmdb)");
 
                     var country = reader.Country(ip);
                     return country?.Country?.Name ?? "N/A";

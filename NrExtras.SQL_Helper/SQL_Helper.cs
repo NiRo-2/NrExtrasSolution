@@ -26,6 +26,11 @@ namespace NrExtras.SQL_Helper
         public static bool IsSQLQueryValid(string sql, out List<string> errors)
         {
             errors = new List<string>();
+
+            // Basic pre-validation for numeric values
+            if (decimal.TryParse(sql, out _) || string.IsNullOrEmpty(sql))
+                return true; // Numeric values and empty strings are valid
+
             TSql140Parser parser = new TSql140Parser(false);
             TSqlFragment fragment;
             IList<ParseError> parseErrors;

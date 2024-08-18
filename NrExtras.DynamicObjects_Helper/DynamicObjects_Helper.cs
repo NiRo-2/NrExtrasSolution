@@ -5,6 +5,17 @@ namespace NrExtras.DynamicObjects_Helper
     public static class DynamicObjects_Helper
     {
         /// <summary>
+        /// Extention which addes the possibility to do IsNullOrEmpty to arrays
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array"></param>
+        /// <returns>true if not null or empty. false if so</returns>
+        public static bool IsNullOrEmpty<T>(this T[] array)
+        {
+            return array == null || array.Length == 0;
+        }
+
+        /// <summary>
         /// Convert object to dictionary of key and value
         /// </summary>
         /// <param name="inObj"></param>
