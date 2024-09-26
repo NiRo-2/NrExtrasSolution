@@ -2,7 +2,6 @@
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System.Data;
-using static NrExtras.Logger.Logger;
 
 namespace NrExtras.Excel_Helper
 {
@@ -94,7 +93,7 @@ namespace NrExtras.Excel_Helper
                                     catch (Exception ex)
                                     {
                                         row.Add("");
-                                        WriteToLog("Error while reading cell, adding empty val instead. Err: " + ex.Message, LogLevel.Error);
+                                        Console.WriteLine("Excel_Helper.ReadExcelFile_Values: Error while reading cell, adding empty val instead. Err: " + ex.Message);
                                     }
                                 }
 

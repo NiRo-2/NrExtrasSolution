@@ -1,5 +1,4 @@
 ﻿using System.Security.Cryptography;
-using static NrExtras.Logger.Logger;
 
 namespace NrExtras.RandomPasswordGenerator
 {
@@ -83,12 +82,8 @@ namespace NrExtras.RandomPasswordGenerator
                     return password;
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                // Log the exception for debugging purposes
-                WriteToLog($"Error generating password: {ex.Message}", LogLevel.Error);
-
-                // Rethrow the exception to allow it to propagate
                 throw;
             }
         }

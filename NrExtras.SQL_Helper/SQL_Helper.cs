@@ -1,7 +1,6 @@
 ﻿using Microsoft.SqlServer.TransactSql.ScriptDom;
 using System.Data;
 using System.Reflection;
-using static NrExtras.Logger.Logger;
 
 namespace NrExtras.SQL_Helper
 {
@@ -78,12 +77,11 @@ namespace NrExtras.SQL_Helper
                             // Log the exception and continue or rethrow based on ignoreArgumentOutOfRangeException
                             if (ex is ArgumentOutOfRangeException && ignoreArgumentOutOfRangeException)
                             {
-                                WriteToLog($"Error mapping data to object: {ex.Message}", LogLevel.Warning);
+                                Console.WriteLine($"SQL_Helper.DataReaderMapToList: Error mapping data to object: {ex.Message}");
                                 continue; // Skip this property and continue with the next one
                             }
                             else
                             {
-                                WriteToLog($"Error mapping data to object: {ex.Message}", LogLevel.Error);
                                 throw; // Rethrow the exception to allow it to propagate
                             }
                         }
@@ -93,7 +91,6 @@ namespace NrExtras.SQL_Helper
             }
             catch (Exception ex)
             {
-                WriteToLog($"Error reading data from data reader: {ex.Message}", LogLevel.Error);
                 throw; // Rethrow the exception to allow it to propagate
             }
             finally

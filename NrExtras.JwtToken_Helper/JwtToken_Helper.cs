@@ -2,7 +2,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using static NrExtras.Logger.Logger;
 
 namespace NrExtras.JwtToken_Helper
 {
@@ -103,7 +102,7 @@ namespace NrExtras.JwtToken_Helper
             }
             catch (Exception e)
             {
-                WriteToLog($"JwtToken_Helper.ValidateCurrentToken - {e.Message}", LogLevel.Error);
+                //WriteToLog($"JwtToken_Helper.ValidateCurrentToken - {e.Message}", LogLevel.Error);
                 return false;
             }
             return true;

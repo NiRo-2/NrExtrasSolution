@@ -14,7 +14,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NrExtras.DynamicObjects_Helper\NrExtras.DynamicObjects_Helper.csproj" />
-    <ProjectReference Include="..\NrExtras.Logger\NrExtras.Logger.csproj" />
   </ItemGroup>
 
 </Project>
