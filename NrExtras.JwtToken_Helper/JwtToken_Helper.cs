@@ -78,9 +78,8 @@ namespace NrExtras.JwtToken_Helper
         /// <param name="issuer">who creater this token</param>
         /// <param name="audience">audience - to who this token ment</param>
         /// <param name="token">the jwt token</param>
-        /// <param name="writeFailReasonToLog">true by default. if true, write fail reason to log</param>
-        /// <returns>true if valid, false otherwise</returns>
-        public static bool ValidateCurrentToken(string secretKey, string issuer, string audience, string token, bool writeFailReasonToLog = true)
+        /// <returns>true if valid, throw exception if invalid</returns>
+        public static bool ValidateCurrentToken(string secretKey, string issuer, string audience, string token)
         {
             var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
 
@@ -100,10 +99,10 @@ namespace NrExtras.JwtToken_Helper
                     LifetimeValidator = CustomLifetimeValidator,
                 }, out SecurityToken validatedToken);
             }
-            catch (Exception e)
+            catch
             {
-                //WriteToLog($"JwtToken_Helper.ValidateCurrentToken - {e.Message}", LogLevel.Error);
-                return false;
+                //return false;
+                throw;
             }
             return true;
         }

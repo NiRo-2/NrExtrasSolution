@@ -1,8 +1,6 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using MaxMind.GeoIP2;
 using Microsoft.AspNetCore.Http;
-using MaxMind.GeoIP2;
+using System.Net;
 
 namespace NrExtras.NetAddressUtils
 {
@@ -21,10 +19,7 @@ namespace NrExtras.NetAddressUtils
                 return "N/A";
 
             if (!IPAddress.TryParse(ipAddress, out var ip))
-            {
-                Console.WriteLine($"Invalid IP address format: {ipAddress}");
                 return "N/A";
-            }
 
             try
             {
@@ -38,9 +33,8 @@ namespace NrExtras.NetAddressUtils
                     return country?.Country?.Name ?? "N/A";
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"Error retrieving country data for IP {ipAddress}: {ex.Message}");
                 return "N/A";
             }
         }
@@ -75,9 +69,8 @@ namespace NrExtras.NetAddressUtils
                 var hostEntry = Dns.GetHostEntry(ipAddress);
                 return hostEntry.HostName;
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine($"DNS resolution failed for IP {ipAddress}: {ex.Message}");
                 return ipAddress.ToString();
             }
         }
