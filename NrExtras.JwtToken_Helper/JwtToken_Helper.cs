@@ -82,7 +82,6 @@ namespace NrExtras.JwtToken_Helper
         public static bool ValidateCurrentToken(string secretKey, string issuer, string audience, string token)
         {
             var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
-
             var tokenHandler = new JwtSecurityTokenHandler();
             try
             {
@@ -101,7 +100,6 @@ namespace NrExtras.JwtToken_Helper
             }
             catch
             {
-                //return false;
                 throw;
             }
             return true;

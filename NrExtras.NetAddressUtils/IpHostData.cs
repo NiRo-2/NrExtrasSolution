@@ -29,8 +29,7 @@ namespace NrExtras.NetAddressUtils
                     if (reader.Metadata.BuildDate < DateTime.Now.AddMonths(-6))
                         Console.WriteLine("GeoLite2 database is older than 6 months. Please update at https://www.maxmind.com/en/accounts/1027697/geoip/downloads - choose GeoLite2 Country GeoIP2 Binary (.mmdb)");
 
-                    var country = reader.Country(ip);
-                    return country?.Country?.Name ?? "N/A";
+                    return reader.Country(ip)?.Country?.Name ?? "N/A";
                 }
             }
             catch
@@ -46,8 +45,7 @@ namespace NrExtras.NetAddressUtils
         /// <returns>Found IP address, or an empty string if no IP address found</returns>
         public static string GetIpAddressFromHttpContext(HttpContext httpContext)
         {
-            var ipAddress = httpContext.Connection.RemoteIpAddress;
-            return ipAddress?.ToString() ?? string.Empty;
+            return httpContext.Connection.RemoteIpAddress?.ToString() ?? string.Empty;
         }
 
         /// <summary>
@@ -60,14 +58,11 @@ namespace NrExtras.NetAddressUtils
             var ipAddress = httpContext.Connection.RemoteIpAddress;
 
             if (ipAddress == null)
-            {
                 return string.Empty;
-            }
 
             try
             {
-                var hostEntry = Dns.GetHostEntry(ipAddress);
-                return hostEntry.HostName;
+                return Dns.GetHostEntry(ipAddress).HostName;
             }
             catch
             {
