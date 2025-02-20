@@ -1,7 +1,63 @@
-﻿namespace NrExtras.ExecuteTasks
+﻿using System.Diagnostics;
+using System.Text;
+
+namespace NrExtras.ExecuteTasks
 {
     public static class ExecuteTasks
     {
+        /// <summary>
+        /// Run python script with args and return it's result
+        /// </summary>
+        /// <param name="script">script path</param>
+        /// <param name="args">args</param>
+        /// <returns>script output</returns>
+        public static string RunPythonScript(string script, string args="")
+        {
+            try
+            {
+                // Check if the script exists
+                if (File.Exists(script) == false) throw new Exception("Script not found");
+
+                // Configure the process to run the Python script
+                ProcessStartInfo start = new ProcessStartInfo
+                {
+                    FileName = "python", // or "python3" depending on your environment
+                    Arguments = $"{script} {args}",
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                    CreateNoWindow = true
+                };
+
+                using (Process process = Process.Start(start))
+                {
+                    // Read the output from the script
+                    StringBuilder output = new StringBuilder();
+                    StringBuilder error = new StringBuilder();
+
+                    process.OutputDataReceived += (sender, e) => output.AppendLine(e.Data);
+                    process.ErrorDataReceived += (sender, e) => error.AppendLine(e.Data);
+
+                    process.BeginOutputReadLine();
+                    process.BeginErrorReadLine();
+
+                    process.WaitForExit();
+
+                    if (process.ExitCode != 0)
+                    {
+                        output.AppendLine("Error occurred:");
+                        output.AppendLine(error.ToString());
+                    }
+
+                    return output.ToString();
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
         /// <summary>
         /// Execute command and read output
         /// </summary>

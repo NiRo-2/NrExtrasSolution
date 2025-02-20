@@ -60,7 +60,7 @@ namespace NrExtras.Google
                         "user",
                         CancellationToken.None,
                         new FileDataStore(credPath, true)).Result;
-                    Logger.Logger.WriteToLog("Credential file saved to: " + credPath);
+                    //Logger.Logger.WriteToLog("Credential file saved to: " + credPath);
                 }
 
                 // Create Google Sheets API service.
