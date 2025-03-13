@@ -6,7 +6,8 @@ namespace NrExtras.NetAddressUtils
 {
     public static class IpHostData
     {
-        private static readonly string _dbPath = Path.Combine(AppContext.BaseDirectory, "GeoLite2-Country.mmdb");
+        private const string dbFileName = "GeoLite2-Country.mmdb";
+        private static readonly string _dbPath = Path.Combine(AppContext.BaseDirectory, dbFileName);
 
         /// <summary>
         /// Get country from IP address using a local GeoIP database
@@ -23,14 +24,21 @@ namespace NrExtras.NetAddressUtils
 
             try
             {
-                using (var reader = new DatabaseReader(_dbPath))
+                //if the database is not found, download it from MaxMind
+                if (File.Exists(_dbPath) == false)
                 {
-                    // Check if the database is outdated
-                    if (reader.Metadata.BuildDate < DateTime.Now.AddMonths(-6))
-                        Console.WriteLine("GeoLite2 database is older than 6 months. Please update at https://www.maxmind.com/en/accounts/1027697/geoip/downloads - choose GeoLite2 Country GeoIP2 Binary (.mmdb)");
-
-                    return reader.Country(ip)?.Country?.Name ?? "N/A";
+                    Console.WriteLine("GeoLite2 database not found. Please update at https://www.maxmind.com/en/accounts/1027697/geoip/downloads - choose GeoLite2 Country GeoIP2 Binary (.mmdb)");
+                    throw new Exception($"{dbFileName} not found.");
                 }
+                else
+                    using (var reader = new DatabaseReader(_dbPath))
+                    {
+                        // Check if the database is outdated - auto download and update the database
+                        if (reader.Metadata.BuildDate < DateTime.Now.AddMonths(-6))
+                            Console.WriteLine("GeoLite2 database is older than 6 months. Please update at https://www.maxmind.com/en/accounts/1027697/geoip/downloads - choose GeoLite2 Country GeoIP2 Binary (.mmdb)");
+
+                        return reader.Country(ip)?.Country?.Name ?? "N/A";
+                    }
             }
             catch
             {
