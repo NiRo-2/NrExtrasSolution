@@ -4,7 +4,10 @@ namespace NrExtras.RandomPasswordGenerator
 {
     public static class RandomPasswordGenerator
     {
-        private static readonly Random random = new Random();
+        private static readonly string LowercaseLetters = "abcdefghijklmnopqrstuvwxyz";
+        private static readonly string UppercaseLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        private static readonly string Digits = "0123456789";
+        private static readonly string Symbols = "!@#$%^&*()-_=+[]{}|;:',.<>?/";
 
         // Define default min and max password lengths.
         private static int DEFAULT_MIN_PASSWORD_LENGTH = 8;
@@ -46,45 +49,66 @@ namespace NrExtras.RandomPasswordGenerator
         /// Generate password in custom lenght
         /// </summary>
         /// <param name="length">pass length</param>
+        /// <param name="useLowercaseLetters">true by default</param>
+        /// <param name="useUppercaseLetters">true by default</param>
+        /// <param name="useDigits">true by default</param>
+        /// <param name="useSymbols">true by default</param>
         /// <returns>random generated pass</returns>
-        public static string Generate(int length)
+        public static string Generate(int length, bool useLowercaseLetters = true, bool useUppercaseLetters = true, bool useDigits = true, bool useSymbols = true)
         {
-            return Generate(length, length);
+            return Generate(length, length,useLowercaseLetters,useUppercaseLetters,useDigits,useSymbols);
         }
+
         /// <summary>
-        /// Generate random pass in length between min and max
+        /// Generate a random password with a specified length and character set.
         /// </summary>
         /// <param name="min">min chars count</param>
         /// <param name="max">max chars count</param>
-        /// <returns>random password</returns>
+        /// <param name="useLowercaseLetters">true by default</param>
+        /// <param name="useUppercaseLetters">true by default</param>
+        /// <param name="useDigits">true by default</param>
+        /// <param name="useSymbols">true by default</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         /// <exception cref="Exception">incase min is not equal or bigger then max</exception>
-        public static string Generate(int min, int max)
+        /// 
+        public static string Generate(int min, int max,bool useLowercaseLetters = true,bool useUppercaseLetters = true,bool useDigits = true,bool useSymbols = true)
         {
-            const string chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_=+[]{}|;:',.<>?/";
-            if (min > max) throw new ArgumentException("Minimum length must be equal to or smaller than maximum length.");
+            string chars = string.Empty;
+            if (useLowercaseLetters)
+                chars += LowercaseLetters;
+            if (useUppercaseLetters)
+                chars += UppercaseLetters;
+            if (useDigits)
+                chars += Digits;
+            if (useSymbols)
+                chars += Symbols;
+
+            if (string.IsNullOrEmpty(chars))
+                throw new ArgumentException("At least one character set must be selected.");
 
             try
             {
-                int bytesCount = random.Next(min, max);
+                // Validate the min and max values
+                if (min > max)
+                    throw new ArgumentException("Minimum length must be equal to or smaller than maximum length.");
 
-                using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+                int length = RandomNumberGenerator.GetInt32(min, max + 1); // max is exclusive
+                byte[] randomBytes = new byte[length];
+                RandomNumberGenerator.Fill(randomBytes);
+
+                char[] result = new char[length];
+                for (int i = 0; i < length; i++)
                 {
-                    byte[] randomBytes = new byte[bytesCount];
-                    rng.GetBytes(randomBytes);
-
-                    string password = string.Empty;
-                    for (int i = 0; i < bytesCount; i++)
-                    {
-                        int index = randomBytes[i] % chars.Length;
-                        password = string.Concat(password, chars[index]);
-                    }
-
-                    return password;
+                    int index = randomBytes[i] % chars.Length;
+                    result[i] = chars[index];
                 }
+
+                return new string(result);
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                throw new Exception("Error generating password: " + ex.Message, ex);
             }
         }
     }

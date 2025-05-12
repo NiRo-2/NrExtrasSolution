@@ -2,6 +2,69 @@
 
 namespace NrExtras.NetAddressUtils
 {
+    public static class NetworkUtils
+    {
+        #region Check if url works
+        /// <summary>
+        /// Results helper class
+        /// </summary>
+        public class UrlCheckResult
+        {
+            public bool IsSuccess { get; set; }
+            public string? ErrorMessage { get; set; }
+        }
+
+        // Set a shared HttpClient with a reasonable timeout
+        private static readonly HttpClient client = new HttpClient
+        {
+            Timeout = TimeSpan.FromSeconds(5) // Customize the timeout here
+        };
+
+        /// <summary>
+        /// Check if a URL works by sending a HEAD request.
+        /// </summary>
+        /// <param name="url">url to check</param>
+        /// <returns>results of success or error message</returns>
+        public static async Task<UrlCheckResult> UrlWorksAsync(string url)
+        {
+            try
+            {
+                using (var request = new HttpRequestMessage(HttpMethod.Head, url))
+                {
+                    HttpResponseMessage response = await client.SendAsync(request);
+                    return new UrlCheckResult
+                    {
+                        IsSuccess = response.IsSuccessStatusCode
+                    };
+                }
+            }
+            catch (TaskCanceledException ex) when (ex.InnerException is TimeoutException || !ex.CancellationToken.IsCancellationRequested)
+            {
+                return new UrlCheckResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = "Request timed out."
+                };
+            }
+            catch (HttpRequestException ex)
+            {
+                return new UrlCheckResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = $"HTTP error: {ex.Message}"
+                };
+            }
+            catch (UriFormatException)
+            {
+                return new UrlCheckResult
+                {
+                    IsSuccess = false,
+                    ErrorMessage = "Invalid URL format."
+                };
+            }
+        }
+        #endregion
+    }
     public static class IpAndHost_Helper
     {
         #region Get all ips between IP to IP
