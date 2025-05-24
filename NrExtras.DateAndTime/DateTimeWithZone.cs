@@ -46,7 +46,7 @@ namespace NrExtras.DateAndTime
         /// <param name="second"></param>
         /// <returns></returns>
         public static TimeSpan Compare(DateTimeWithZone first, DateTimeWithZone second)
-            => second.UtcDateTime - first.UtcDateTime;
+            => second.DateTimeOffset - first.DateTimeOffset;
 
         /// <summary>
         /// Get the time zone info from the time zone ID using TZConvert which is a wrapper around the Windows and IANA time zone databases.

@@ -56,7 +56,7 @@ namespace NrExtras.RandomPasswordGenerator
         /// <returns>random generated pass</returns>
         public static string Generate(int length, bool useLowercaseLetters = true, bool useUppercaseLetters = true, bool useDigits = true, bool useSymbols = true)
         {
-            return Generate(length, length,useLowercaseLetters,useUppercaseLetters,useDigits,useSymbols);
+            return Generate(length, length, useLowercaseLetters, useUppercaseLetters, useDigits, useSymbols);
         }
 
         /// <summary>
@@ -72,7 +72,7 @@ namespace NrExtras.RandomPasswordGenerator
         /// <exception cref="ArgumentException"></exception>
         /// <exception cref="Exception">incase min is not equal or bigger then max</exception>
         /// 
-        public static string Generate(int min, int max,bool useLowercaseLetters = true,bool useUppercaseLetters = true,bool useDigits = true,bool useSymbols = true)
+        public static string Generate(int min, int max, bool useLowercaseLetters = true, bool useUppercaseLetters = true, bool useDigits = true, bool useSymbols = true)
         {
             string chars = string.Empty;
             if (useLowercaseLetters)

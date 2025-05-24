@@ -23,8 +23,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.EmailHelper", "NrE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.EncryptionHelper", "NrExtras.EncryptionHelper\NrExtras.EncryptionHelper.csproj", "{4ADD0F3E-3962-4184-B66D-09C23D889816}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.EnumConverter", "NrExtras.EnumConverter\NrExtras.EnumConverter.csproj", "{1820720C-22E0-4EAE-B8ED-CC0FB299C5ED}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.Excel_Helper", "NrExtras.Excel_Helper\NrExtras.Excel_Helper.csproj", "{308930A8-CBA7-4EA7-8561-284ACCBB767A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.ExecuteTasks", "NrExtras.ExecuteTasks\NrExtras.ExecuteTasks.csproj", "{3219805A-43C1-47D6-8B68-A348C2F7E343}"
@@ -60,6 +58,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NrExtras.NetAddressUtils", "NrExtras.NetAddressUtils\NrExtras.NetAddressUtils.csproj", "{A6D81042-91D8-43B2-852E-8C1CFBE944BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NrExtrasTelegramHelper", "NrExtrasTelegramHelper\NrExtrasTelegramHelper.csproj", "{16D3283E-D74E-4E7A-9E39-2A81D9B3F9D1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NrExtras.EnumsHelper", "NrExtras.EnumsHelper\NrExtras.EnumsHelper.csproj", "{E6B52DF5-57CE-4002-9FE3-E9580AA78282}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,10 +107,6 @@ Global
 		{4ADD0F3E-3962-4184-B66D-09C23D889816}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4ADD0F3E-3962-4184-B66D-09C23D889816}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4ADD0F3E-3962-4184-B66D-09C23D889816}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1820720C-22E0-4EAE-B8ED-CC0FB299C5ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1820720C-22E0-4EAE-B8ED-CC0FB299C5ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1820720C-22E0-4EAE-B8ED-CC0FB299C5ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1820720C-22E0-4EAE-B8ED-CC0FB299C5ED}.Release|Any CPU.Build.0 = Release|Any CPU
 		{308930A8-CBA7-4EA7-8561-284ACCBB767A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{308930A8-CBA7-4EA7-8561-284ACCBB767A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{308930A8-CBA7-4EA7-8561-284ACCBB767A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -183,6 +179,10 @@ Global
 		{16D3283E-D74E-4E7A-9E39-2A81D9B3F9D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16D3283E-D74E-4E7A-9E39-2A81D9B3F9D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16D3283E-D74E-4E7A-9E39-2A81D9B3F9D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B52DF5-57CE-4002-9FE3-E9580AA78282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B52DF5-57CE-4002-9FE3-E9580AA78282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B52DF5-57CE-4002-9FE3-E9580AA78282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B52DF5-57CE-4002-9FE3-E9580AA78282}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
