@@ -4,6 +4,8 @@ namespace NrExtras.Google
 {
     public static class Google_reCaptcha_Helper
     {
+        const double MinScore = 0.5; // Minimum score to consider a request as valid
+
         /// <summary>
         /// Validate reCaptcha token using secret key
         /// </summary>
@@ -22,7 +24,7 @@ namespace NrExtras.Google
                     var recaptchaResponse = JsonConvert.DeserializeObject<RecaptchaResponse>(jsonResponse);
 
                     // Consider a threshold score for deciding (e.g., 0.5)
-                    return recaptchaResponse?.Success == true && recaptchaResponse.Score >= 0.5;
+                    return recaptchaResponse?.Success == true && recaptchaResponse.Score >= MinScore;
                 }
             }
         }
@@ -37,13 +39,13 @@ namespace NrExtras.Google
             public float Score { get; set; }
 
             [JsonProperty("action")]
-            public string Action { get; set; }
+            public string Action { get; set; } = string.Empty;
 
             [JsonProperty("challenge_ts")]
             public DateTime ChallengeTimestamp { get; set; }
 
             [JsonProperty("hostname")]
-            public string Hostname { get; set; }
+            public string Hostname { get; set; } = string.Empty;
         }
     }
 }

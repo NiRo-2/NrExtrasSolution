@@ -45,6 +45,12 @@ namespace NrExtras.EncryptionHelper
         {
             var keybytes = Encoding.UTF8.GetBytes(key);
             var iv = Encoding.UTF8.GetBytes(key);
+
+            //incase of empty string - return empty string
+            if (string.IsNullOrEmpty(plainText))
+                return ""; // Return empty instead of doing real encryption
+
+            //encrypt
             var encryptedBytes = EncryptStringToBytes_Aes(plainText, keybytes, iv);
             string encrypted = Convert.ToBase64String(encryptedBytes);
             return encrypted;
@@ -54,8 +60,10 @@ namespace NrExtras.EncryptionHelper
             // Check arguments.
             if (plainText == null || plainText.Length <= 0)
                 throw new ArgumentNullException("plainText");
-            if (Key == null || Key.Length != 16) // 128-bit key size
+            if (Key == null)
                 throw new ArgumentNullException("Key");
+            if (Key.Length != 16) // 128-bit key size
+                throw new ArgumentException("Key length must be 128 bits (16 bytes).", "Key");
             if (IV == null || IV.Length <= 0)
                 throw new ArgumentNullException("IV");
             byte[] encrypted;
@@ -98,6 +106,10 @@ namespace NrExtras.EncryptionHelper
         {
             var keybytes = Encoding.UTF8.GetBytes(key);
             var iv = Encoding.UTF8.GetBytes(key);
+
+            //incase of empty encryped key - return empty string
+            if (string.IsNullOrEmpty(encryptedValue)) return "";
+
             //DECRYPT FROM CRIPTOJS
             var encrypted = Convert.FromBase64String(encryptedValue);
             var decryptedFromJavascript = DecryptStringFromBytes_Aes(encrypted, keybytes, iv);
@@ -108,8 +120,10 @@ namespace NrExtras.EncryptionHelper
             // Check arguments.
             if (cipherText == null || cipherText.Length <= 0)
                 throw new ArgumentNullException("cipherText");
-            if (Key == null || Key.Length != 16) // 128-bit key size
+            if (Key == null)
                 throw new ArgumentNullException("Key");
+            if (Key.Length != 16) // 128-bit key size
+                throw new ArgumentException("Key length must be 128 bits (16 bytes).", "Key");
             if (IV == null || IV.Length <= 0)
                 throw new ArgumentNullException("IV");
 
