@@ -83,25 +83,19 @@ namespace NrExtras.JwtToken_Helper
         {
             var mySecurityKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(secretKey));
             var tokenHandler = new JwtSecurityTokenHandler();
-            try
+            tokenHandler.ValidateToken(token, new TokenValidationParameters
             {
-                tokenHandler.ValidateToken(token, new TokenValidationParameters
-                {
-                    ValidateIssuerSigningKey = true,
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    RequireExpirationTime = true,
-                    ValidIssuer = issuer,
-                    ValidAudience = audience,
-                    IssuerSigningKey = mySecurityKey,
-                    LifetimeValidator = CustomLifetimeValidator,
-                }, out SecurityToken validatedToken);
-            }
-            catch
-            {
-                throw;
-            }
+                ValidateIssuerSigningKey = true,
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                RequireExpirationTime = true,
+                ValidIssuer = issuer,
+                ValidAudience = audience,
+                IssuerSigningKey = mySecurityKey,
+                LifetimeValidator = CustomLifetimeValidator,
+            }, out SecurityToken validatedToken);
+
             return true;
         }
         //helper function to check jwt expire

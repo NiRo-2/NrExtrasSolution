@@ -180,17 +180,10 @@ namespace NrExtras.EncryptionHelper
         /// <returns>decrypted object</returns>
         public static object DecryptStringToObjectAES(string encrypted, string key)
         {
-            try
-            {
-                string json = DecryptStringAES(encrypted, key); //decrypt
-                var obj = JsonConvert.DeserializeObject<object>(json); //deserialize
-                if (obj == null) throw new Exception("Error deserializing object"); //error deserializing
-                return obj; //return found object
-            }
-            catch
-            {
-                throw;
-            }
+            string json = DecryptStringAES(encrypted, key); //decrypt
+            var obj = JsonConvert.DeserializeObject<object>(json); //deserialize
+            if (obj == null) throw new Exception("Error deserializing object"); //error deserializing
+            return obj; //return found object
         }
         #endregion
     }
